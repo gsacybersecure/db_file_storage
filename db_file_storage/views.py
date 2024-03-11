@@ -1,5 +1,6 @@
 # third party
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.contrib.admin.views.decorators import staff_member_required
 from wsgiref.util import FileWrapper
 try:
     from django.utils.translation import ugettext as _
@@ -13,6 +14,7 @@ from db_file_storage.storage import DatabaseFileStorage
 storage = DatabaseFileStorage()
 
 
+@staff_member_required
 def get_file(request, add_attachment_headers, extra_headers=None):
     name = request.GET.get('name')
 
